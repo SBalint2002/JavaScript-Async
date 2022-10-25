@@ -46,12 +46,33 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //Leírás
     document.getElementById('leiras').addEventListener('click', async () => {
-        adatMegjelenites(termekLista);
+        /* let response = await fetch('products.json');
+        let eredmeny = await response.json();
+
+        let filterezes = eredmeny.filter(() => {
+            return eredmeny.description.contains(document.getElementById('szovegmezo').value);
+        })
+
+        adatMegjelenites(filterezes); */
     });
 
     //Ajánlat
     document.getElementById('ajanlat').addEventListener('click', async () => {
-        adatMegjelenites(termekLista);
+        let response = await fetch('products.json');
+        let eredmeny = await response.json();
+
+        let occo = eredmeny.products.filter(e => e.price <=100);
+        let sorrend = occo.sort((a, b) => {
+            if(a.rating < b.rating){
+                return 1;
+            }else if(a.rating > b.rating){
+                return -1;
+            }else {
+                return 0;
+            }
+        });
+
+        adatMegjelenites(sorrend);
     });
 
     function adatMegjelenites(termekek){
