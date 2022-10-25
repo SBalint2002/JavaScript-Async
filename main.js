@@ -46,14 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //Leírás
     document.getElementById('leiras').addEventListener('click', async () => {
-        /* let response = await fetch('products.json');
+        let response = await fetch('products.json');
         let eredmeny = await response.json();
 
-        let filterezes = eredmeny.filter(() => {
-            return eredmeny.description.contains(document.getElementById('szovegmezo').value);
-        })
-
-        adatMegjelenites(filterezes); */
+        let filterezes = eredmeny.products.filter(e => e.description.toUpperCase().includes(document.getElementById('szovegmezo').value.toUpperCase()));
+        adatMegjelenites(filterezes);
     });
 
     //Ajánlat
