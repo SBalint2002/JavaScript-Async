@@ -29,7 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Legdrágább
     document.getElementById('legdragabb').addEventListener('click', async () => {
-        adatMegjelenites(termekLista);
+        let response = await fetch('products.json');
+        let eredmeny = await response.json();
+
+        let expensive = eredmeny.products.sort((a, b) => {
+            if(a.price < b.price){
+                return 1;
+            }else if(a.price > b.price){
+                return -1;
+            }else {
+                return 0;
+            }
+        });
+        adatMegjelenites(expensive);
     });
     
     //Leírás
