@@ -9,7 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //ABC sorrend
     document.getElementById('abc').addEventListener('click', async () => {
-        adatMegjelenites(termekLista);
+        let response = await fetch('products.json');
+        let eredmeny = await response.json();
+
+        let sorrend = eredmeny.products.sort(function(a, b){
+            let elso = a.title.toUpperCase();
+            let masodik = b.title.toUpperCase();
+
+            if(elso < masodik){
+                return -1;
+            }else if( elso > masodik){
+                return 1;
+            }else{
+                return 0;
+            }
+        });
+        adatMegjelenites(sorrend);
     });
 
     //Legdrágább
